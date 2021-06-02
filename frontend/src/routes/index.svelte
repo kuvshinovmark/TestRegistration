@@ -14,10 +14,26 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Account</title>
 </svelte:head>
 
-<h1>Home</h1>
+<div class="main">
+	
+	{#if ID===null}
+	<div class="buttons">
+		<a class="whiteButton" href="/signin"> Войти </a>
+	</div>
+	{:else}
+		<h1>Account token: {ID}</h1>
+		<button class="blackButton" on:click={out}>out</button>
+	{/if}
+	
+</div>
 
-<h1>Account: {ID}</h1>
-<button on:click={out}>out</button>
+<style>
+	.main{
+		margin-top: 50px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+</style>

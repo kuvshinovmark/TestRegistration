@@ -1,31 +1,103 @@
+body{
+  --largeText: calc(22px + (18 - 14) * ((100vw - 300px) / (1440 - 300)));
+  --smallText: calc(10px + (18 - 14) * ((100vw - 300px) / (1440 - 300)));
+  --ubuntu: 'Ubuntu', sans-serif;
+}
+
+
 .box {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
+    width: 25vw;
     background-color: #ffffff;
     border: 3px solid #E1E3E6;
     box-sizing: border-box;
     border-radius: 30px;
-    width: 600px;
     margin-left: auto;
     margin-right: auto;
     padding: 2%;
   }
+
   input {
-    width: 500px;
-    height: 30px;
-    margin-bottom: 0.7em;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 8px 0px 0px 8px;
+    width: 70%;
+    height: 40px;
+    margin-bottom: 0.5em;
+    border-radius: 8px;
+    padding-left: 2em;
     border: 1px solid #E1E3E6;
-    font-family: 'Ubuntu';
-    font-size: calc(14px + (18 - 14) * ((100vw - 300px) / (1440 - 300)));
+    font-family: var(--ubuntu);
+    font-size: var(--smallText);
+    transition: all 0.5s ease;
   }
-  button {
-    width: 120px;
-    height: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 20px;
+  input:focus {
+    outline: none;
+    border: 1px solid #43DFA8;
+    box-shadow: 0 0 10px rgba(67, 223, 168, 0.5);
+  }
+  .buttons{
+		margin-left: auto;
+		margin-right: auto;
+	}
+  button{
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .blackButton {
+		background-color: #00160A;
+		color: #fff;
+		font-family: var(--ubuntu);
+		font-weight: 500;
+    border: 2px solid #00160A;
+		border-radius: 30px;
+		padding: 0.5em 1.3em;
+		font-size: var(--smallText);
+	}
+
+	.blackButton:hover {
+		background-color:#43DFA8;
+    border: 2px solid #43DFA8;
+		color: #00160A;
+	}
+  .whiteButton{
+    text-decoration: none;
+    background-color: transparent;
+    color: #00160A;
+    font-family: var(--ubuntu);
+    font-weight: 500;
+    border: 2px solid #00160A;
+    border-radius: 30px;
+    padding: 0.5em 1.3em;
+    font-size: var(--smallText);
+  }
+  .whiteButton:hover {
+    background-color:#43DFA8;
+    border: 2px solid #43DFA8;
+    color: white;
+    
+  }
+
+  h1{
+    text-align: center;
+    font-size: var(--largeText);
+    margin-top: 0;
+    font-family:'Franklin Gothic Medium', sans-serif;
+  }
+  .errMessage{
+    text-align: center;
+    color: red;
+    font-family: var(--ubuntu);
+    font-size: var(--smallText);
+  }
+  @media (max-width: 1400px){
+    .box{
+      width: 40vw;
+    }
+  }
+  @media (max-width: 700px){
+    .box{
+      width: 80vw;
+    }
   }

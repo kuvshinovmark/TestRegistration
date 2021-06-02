@@ -2,75 +2,36 @@
 	import { page } from '$app/stores';
 </script>
 
-<header>
-	<nav>
-		<ul>
-			<li class:active={$page.path === '/'}><a sveltekit:prefetch href="/">Home</a></li>
-			<li class:active={$page.path === '/signin'}><a sveltekit:prefetch href="/signin">signin</a></li>
-			<li class:active={$page.path === '/signup'}><a sveltekit:prefetch href="/signup">signup</a></li>
-			<li class:active={$page.path === '/changePass'}><a sveltekit:prefetch href="/changePass">change</a></li>
-			<li class:active={$page.path === '/recoveryPass'}><a sveltekit:prefetch href="/recoveryPass">recovery</a></li>
-		</ul>
-	</nav>
-</header>
+<div class="navPanel">
+	<div class="mainBut">
+		<a href="/signin">Вход</a>
+		<a href="/changePass">Смена</a>
+		<a href="/recoveryPass">Восстановление</a>
+		<a href="/">Аккаунт</a>
+	</div>
+</div>
+	
+
 
 <style>
-	header {
+	.navPanel{
+		margin-top: 20px;
 		display: flex;
 		justify-content: space-between;
 	}
-	
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-	}
-
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
-
-	li {
-		position: relative;
-		height: 100%;
-	}
-
-	li.active::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--accent-color);
-	}
-
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 1em;
-		color: var(--heading-color);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 10%;
+	a{
 		text-decoration: none;
-		transition: color 0.2s linear;
 	}
-
-	a:hover {
-		color: var(--accent-color);
+	.mainBut{
+		display: flex;
+		margin: auto;
+	}
+	.mainBut *{
+		padding-right: 1em;
+		color: var(--heading-color);
+		font-size: calc(14px + (18 - 14) * ((100vw - 300px) / (1440 - 300)));
+		text-align: center;
+		margin-top: 0;
+		font-family:'Franklin Gothic Medium', sans-serif;
 	}
 </style>

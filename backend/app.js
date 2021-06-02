@@ -1,6 +1,7 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const objectId = require("mongodb").ObjectID;
+const mailer = require("./nodemailer")
 const cors = require("cors");
 
 const app = express();
@@ -35,6 +36,42 @@ app.post("/api/users", jsonParser, function (req, res) {
     })
 });
 
+app.post("/api/recover/:mail", jsonParser, async function (req, res) {
+    const m = req.params["mail"];
+    const collection = dbClient.db("RegTest").collection("users");
+    await collection.findOne({ mail: m }, await function (err, result) {
+        if (err) return console.log(err);
+        console.log(result);
+        let ID = result._id;
+        const message = {
+            from: 'Mailer Test <test_registration2@mail.ru>',
+            to: m,
+            subject: "Востоновление пароля",
+            text: `ID - ${ID}`
+        }
+        mailer(message);
+    });
+});
+
+app.post("/api/recover", jsonParser, function (req, res) {
+    if (!req.body) return res.sendStatus(400);
+    const userMail = req.body.mail;
+    const userID = req.body.code;
+    // console.log("Провера с " + userMail + " + " + userID);
+    const collection = dbClient.db("RegTest").collection("users");
+    collection.findOne({mail: userMail}, function (err, result) {
+        if (err) return console.log(err);
+        if(result._id == userID){
+            console.log("Good");
+            res.send(result.password);
+        }else {
+            console.log("No good");
+        }
+        // console.log(result);
+        // res.send(result);
+    })
+});
+
 app.post("/api/users/:mail", jsonParser, function (req, res) {
     if (!req.body) return res.sendStatus(400);
     const userPassword = req.body.password;
@@ -52,4 +89,21 @@ app.post("/api/users/:mail", jsonParser, function (req, res) {
             }  
         }
     });
+});
+
+app.put("/api/users", jsonParser, function (req, res) {
+    if (!req.body) return res.sendStatus(400);
+    console.log(req.body);
+    const userMail = req.body.mail;
+    const userNewPass = req.body.newPass;
+    console.log("начало на сервере " + userMail + " " + userNewPass);
+    const collection = dbClient.db("RegTest").collection("users");
+    collection.findOneAndUpdate(
+        { mail: userMail },
+        { $set: { password: userNewPass } },
+        function (err, result) {
+            if(err) return console.log(err); 
+            res.send(result);
+        }
+    );
 });
