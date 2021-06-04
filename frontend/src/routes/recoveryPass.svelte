@@ -2,7 +2,7 @@
 	import {validateEmail} from "$lib/function.js";
 	let mail = "";
 	let code = "";
-	let state = 0;
+	let state = 1;
 	let outBack = "";
 
 
